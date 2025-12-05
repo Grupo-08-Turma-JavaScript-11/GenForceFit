@@ -30,15 +30,14 @@ export class ExercicioController {
     @Get('/nomeexercicio/:nomeExercicio')
     @HttpCode(HttpStatus.OK)
     findByNomeExercicio(@Param('nomeExercicio') nomeExercicio: string): Promise<Exercicio[]>{
-        return this.exercicioService.findByGrupoMuscular(nomeExercicio)
+        return this.exercicioService.findByNomeExercicio(nomeExercicio)
     }
 
     @Get('/nivel/:nivelExercicio')
     @HttpCode(HttpStatus.OK)
     findByNivel(@Param('nivelExercicio') nivelExercicio: string): Promise<Exercicio[]>{
-        return this.exercicioService.findByGrupoMuscular(nivelExercicio)
+         return this.exercicioService.findByNivel(nivelExercicio)
     }
-
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
