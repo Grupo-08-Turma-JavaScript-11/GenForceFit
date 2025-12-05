@@ -15,35 +15,35 @@ export class ExercicioController {
         return this.exercicioService.findAll();
     }
 
-@Get('/:id')
-@HttpCode(HttpStatus.OK)
-findById(@Param ('id', ParseIntPipe) id: number): Promise<Exercicio>{
-    return this.exercicioService.findById(id)
-}
+    @Get('/:id')
+    @HttpCode(HttpStatus.OK)
+    findById(@Param ('id', ParseIntPipe) id: number): Promise<Exercicio>{
+        return this.exercicioService.findById(id)
+    }
 
-@Get('/grupomuscular/:grupoMuscular')
-@HttpCode(HttpStatus.OK)
-findByGrupoMuscular(@Param('grupoMuscular') grupoMuscular: string): Promise<Exercicio[]>{
-    return this.exercicioService.findByGrupoMuscular(grupoMuscular)
-}
+    @Get('/grupomuscular/:grupoMuscular')
+    @HttpCode(HttpStatus.OK)
+    findByGrupoMuscular(@Param('grupoMuscular') grupoMuscular: string): Promise<Exercicio[]>{
+        return this.exercicioService.findByGrupoMuscular(grupoMuscular)
+    }
 
-@Post()
-@HttpCode(HttpStatus.CREATED)
-create(@Body() exercicio: Exercicio): Promise<Exercicio>{
-    return this.exercicioService.create(exercicio)
-} 
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
+    create(@Body() exercicio: Exercicio): Promise<Exercicio>{
+        return this.exercicioService.create(exercicio)
+    } 
 
-@Put()
-@HttpCode(HttpStatus.OK)
-update(@Body () exercicio: Exercicio): Promise<Exercicio>{
-    return this.exercicioService.update(exercicio)
+    @Put()
+    @HttpCode(HttpStatus.OK)
+    update(@Body () exercicio: Exercicio): Promise<Exercicio>{
+        return this.exercicioService.update(exercicio)
     }
 
 
-@Delete('/:id')
-@HttpCode(HttpStatus.NO_CONTENT)
-delete(id: number): Promise<DeleteResult> {
-    return this.exercicioService.delete(id)
+    @Delete('/:id')
+    @HttpCode(HttpStatus.NO_CONTENT)
+    delete(id: number): Promise<DeleteResult> {
+        return this.exercicioService.delete(id)
     }
 
 }
