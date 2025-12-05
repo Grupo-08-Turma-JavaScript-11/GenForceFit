@@ -13,7 +13,7 @@ import { ExercicioModule } from './exercicio/exercicio.module';
     password: "root",
     database: "db_genforcefit",
     entities: [Exercicio],
-    synchronize: true,
+    synchronize: false,
   }),
   ExercicioModule],
   controllers: [],

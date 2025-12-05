@@ -27,6 +27,19 @@ export class ExercicioController {
         return this.exercicioService.findByGrupoMuscular(grupoMuscular)
     }
 
+    @Get('/nomeexercicio/:nomeExercicio')
+    @HttpCode(HttpStatus.OK)
+    findByNomeExercicio(@Param('nomeExercicio') nomeExercicio: string): Promise<Exercicio[]>{
+        return this.exercicioService.findByGrupoMuscular(nomeExercicio)
+    }
+
+    @Get('/nivel/:nivelExercicio')
+    @HttpCode(HttpStatus.OK)
+    findByNivel(@Param('nivelExercicio') nivelExercicio: string): Promise<Exercicio[]>{
+        return this.exercicioService.findByGrupoMuscular(nivelExercicio)
+    }
+
+
     @Post()
     @HttpCode(HttpStatus.CREATED)
     create(@Body() exercicio: Exercicio): Promise<Exercicio>{
@@ -42,7 +55,7 @@ export class ExercicioController {
 
     @Delete('/:id')
     @HttpCode(HttpStatus.NO_CONTENT)
-    delete(id: number): Promise<DeleteResult> {
+    delete(@Param ('id', ParseIntPipe) id: number): Promise<DeleteResult> {
         return this.exercicioService.delete(id)
     }
 
