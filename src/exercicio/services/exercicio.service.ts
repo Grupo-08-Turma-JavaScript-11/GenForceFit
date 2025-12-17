@@ -3,6 +3,7 @@ import { Exercicio } from '../entities/exercicio.entity'
 import { InjectRepository } from '@nestjs/typeorm'
 import { ILike, Repository } from 'typeorm'
 import { DeleteResult } from 'typeorm'
+import { TipoService } from '../../Tipo/Service/Tipo.service'
 
 
 @Injectable()
@@ -12,7 +13,7 @@ export class ExercicioService {
     @InjectRepository(Exercicio)
     private exercicioRepository: Repository<Exercicio>,
     // private usuarioService: UsuarioService
-    // private tipoService: TipoService
+    private tipoService: TipoService
   ) { }
 
   async findAll(): Promise<Exercicio[]> {

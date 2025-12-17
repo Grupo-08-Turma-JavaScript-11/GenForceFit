@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty } from "class-validator";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Tipo } from "../../Tipo/Entity/Tipo.Entity";
 
 @Entity({ name: "tb_exercicio" })
 export class Exercicio {
@@ -43,10 +44,11 @@ export class Exercicio {
     // })
     // usuario: Usuario
 
-    // @ManyToOne(() => Tipo, (tipo) => tipo.exercicio, {
-    //     onDelete: 'CASCADE'
-    // })
-    // tipo: Tipo
+    @ApiProperty()
+    @ManyToOne(() => Tipo, (tipo) => tipo.exercicio, {
+         onDelete: 'CASCADE'
+    })
+     tipo: Tipo
 
 
 
