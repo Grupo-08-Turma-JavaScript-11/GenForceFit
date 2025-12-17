@@ -14,7 +14,7 @@ import { AppController } from './app.controller'
     host: "localhost",
     port: 3306,
     username: "root",
-    password: "root",
+    password: "12345678",
     database: "db_genforcefit",
     entities: [Exercicio, Tipo, Usuario],
     synchronize: false,
