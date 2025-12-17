@@ -4,9 +4,9 @@ import { Exercicio } from "./entities/exercicio.entity";
 import { ExercicioService } from "./services/exercicio.service";
 import { ExercicioController } from "./controllers/exercicio.controller";
 import { UsuarioModule } from "../usuarios/usuarios.module";
-import { TipoModule } from "../Tipo/Tipo.module";
+import { TipoModule } from "../tipo/tipo.module";
 import { UsuarioService } from "../usuarios/service/usuarios.service";
-import { TipoService } from "../Tipo/Service/Tipo.service";
+import { TipoService } from "../tipo/service/tipo.service";
 
 
 

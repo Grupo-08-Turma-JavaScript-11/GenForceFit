@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository,ILike, DeleteResult } from 'typeorm'
-import { Tipo } from '../Entity/Tipo.Entity'
+import { Tipo } from '../entity/tipo.entity'
 
 @Injectable()
 export class TipoService {

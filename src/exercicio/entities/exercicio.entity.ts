@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty } from "class-validator";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Tipo } from "../../Tipo/Entity/Tipo.Entity";
+import { Tipo } from "../../tipo/entity/tipo.entity";
 import { Usuario } from "../../usuarios/entities/usuarios.entity";
 
 @Entity({ name: "tb_exercicio" })

@@ -1,8 +1,8 @@
 import {
   Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put
 } from '@nestjs/common'
-import { TipoService } from '../Service/Tipo.service'
-import { Tipo } from '../Entity/Tipo.Entity'
+import { TipoService } from '../service/tipo.service'
+import { Tipo } from '../entity/tipo.entity'
 import { ApiTags } from '@nestjs/swagger'
 import { DeleteResult } from 'typeorm'
 
