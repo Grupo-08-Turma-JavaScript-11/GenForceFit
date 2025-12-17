@@ -5,7 +5,8 @@ import { TipoModule } from './Tipo/Tipo.module'
 import { Exercicio } from './exercicio/entities/exercicio.entity'
 import { Tipo } from './Tipo/Entity/Tipo.Entity'
 import { Usuario } from './usuarios/entities/usuarios.entity'
-import { UsuariosModule } from './usuarios/usuarios.module'
+import { UsuarioModule } from './usuarios/usuarios.module'
+import { AppController } from './app.controller'
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -20,8 +21,8 @@ import { UsuariosModule } from './usuarios/usuarios.module'
   }),
     ExercicioModule,
     TipoModule,
-    UsuariosModule],
-  controllers: [],
+    UsuarioModule],
+  controllers: [AppController],
   providers: [],
   
 })

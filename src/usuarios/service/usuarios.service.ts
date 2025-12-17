@@ -1,11 +1,11 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Usuario } from '../entities/usuarios.entity';
 
 @Injectable()
-export class UsuariosService {
+export class UsuarioService {
   constructor(
     @InjectRepository(Usuario)
     private readonly usuarioRepository: Repository<Usuario>,
@@ -21,10 +21,7 @@ export class UsuariosService {
     });
 
     if (!usuario) {
-      throw new HttpException(
-        'Usuário não encontrado',
-        HttpStatus.NOT_FOUND,
-      );
+      throw new HttpException('Usuário não encontrado',HttpStatus.NOT_FOUND,);
     }
 
     return usuario;
@@ -40,10 +37,7 @@ export class UsuariosService {
     const usuarioExistente = await this.findByUsuario(usuario.usuario);
 
     if (usuarioExistente) {
-      throw new HttpException(
-        'Usuário já existe',
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new HttpException('Usuário já existe', HttpStatus.BAD_REQUEST);
     }
 
     const salt = await bcrypt.genSalt();
@@ -52,38 +46,23 @@ export class UsuariosService {
     return this.usuarioRepository.save(usuario);
   }
 
-  async update(id: number, usuario: Usuario): Promise<Usuario> {
-    const usuarioBanco = await this.findById(id);
+  async update(usuario: Usuario): Promise<Usuario> {
+    
+    const usuarioBanco = await this.findById(usuario.id);
 
     const usuarioExistente = await this.findByUsuario(usuario.usuario);
 
-    if (
-      usuarioExistente &&
-      usuarioExistente.id !== usuarioBanco.id
-    ) {
-      throw new HttpException(
-        'Usuário já existe',
-        HttpStatus.BAD_REQUEST,
-      );
+    if (usuarioExistente && usuarioExistente.id !== usuarioBanco.id) {
+      throw new HttpException('Usuário já existe',HttpStatus.BAD_REQUEST);
     }
 
-    usuarioBanco.nome = usuario.nome;
-    usuarioBanco.usuario = usuario.usuario;
-    usuarioBanco.tipo = usuario.tipo;
-    usuarioBanco.altura = usuario.altura;
-    usuarioBanco.peso = usuario.peso;
-    usuarioBanco.IMC = usuario.IMC;
-    usuarioBanco.foto = usuario.foto;
-
-    if (usuario.senha) {
-      const salt = await bcrypt.genSalt();
-      usuarioBanco.senha = await bcrypt.hash(usuario.senha, salt);
-    }
-
-    return this.usuarioRepository.save(usuarioBanco);
+    return this.usuarioRepository.save(usuario);
   }
 
-  async remove(id: number): Promise<void> {
-    await this.usuarioRepository.delete(id);
+  async delete(id: number): Promise<DeleteResult>{
+    
+    await this.findById(id)
+    
+    return this.usuarioRepository.delete(id);
   }
 }

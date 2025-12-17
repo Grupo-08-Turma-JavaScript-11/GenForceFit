@@ -27,7 +27,7 @@ export class Usuario {
   senha: string;
 
   @IsNotEmpty()
-  @Column({ length: 100 })
+  @Column({ length: 100, nullable: false})
   @ApiProperty()
   tipo: string;
 
@@ -39,19 +39,17 @@ export class Usuario {
   @IsNotEmpty()
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
   @ApiProperty()
-  peso: string;
-
-
+  peso: number;
 
   @Column({ type: 'decimal', precision: 10, scale: 2})
   @ApiProperty()
   IMC: number;
 
-
   @Column({ length: 45, nullable: true })
   @ApiProperty()
   foto: string;
 
+  @ApiProperty()
   @OneToMany(() => Exercicio, exercicio => exercicio.usuario)
   exercicio: Exercicio[];
 }

@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { ILike, Repository } from 'typeorm'
 import { DeleteResult } from 'typeorm'
 import { TipoService } from '../../Tipo/Service/Tipo.service'
+import { UsuarioService } from '../../usuarios/service/usuarios.service'
 
 
 @Injectable()
@@ -12,28 +13,26 @@ export class ExercicioService {
   constructor(
     @InjectRepository(Exercicio)
     private exercicioRepository: Repository<Exercicio>,
-    // private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
     private tipoService: TipoService
   ) { }
 
   async findAll(): Promise<Exercicio[]> {
-    return await this.exercicioRepository.find()
-    //{  
-    //relations: {
-    //usuario:true,
-    //tipo: true
-    //}
-    //}
-
+    return await this.exercicioRepository.find({
+      relations: {
+        usuario: true,
+        tipo: true
+      }
+    })
   }
 
   async findById(id: number): Promise<Exercicio> {
     const exercicio = await this.exercicioRepository.findOne({
-      where: { id }
-      //relations: {
-      //usuario:true,
-      //tipo: true
-      //}
+      where: { id },
+      relations: {
+        usuario: true,
+        tipo: true
+      }
     })
 
     if (!exercicio) {
@@ -46,11 +45,11 @@ export class ExercicioService {
     return await this.exercicioRepository.find({
       where: {
         nome: ILike(`%${nome}%`)
+      },
+      relations: {
+        usuario: true,
+        tipo: true
       }
-      //relations: {
-      //usuario:true,
-      //tipo: true
-      //}
     })
   }
 
@@ -58,11 +57,11 @@ export class ExercicioService {
     return await this.exercicioRepository.find({
       where: {
         equipamento: ILike(`%${equipamento}%`)
+      },
+      relations: {
+        usuario: true,
+        tipo: true
       }
-      //relations: {
-      //usuario:true,
-      //tipo: true
-      //}
     })
   }
 
@@ -80,7 +79,7 @@ export class ExercicioService {
     await this.verificaExercicio(exercicio)
 
     return this.exercicioRepository.save(exercicio)
-  
+
   }
 
   async delete(id: number): Promise<DeleteResult> {
@@ -94,16 +93,15 @@ export class ExercicioService {
     return await this.exercicioRepository.delete(id)
   }
 
-  async verificaExercicio(exercicio: Exercicio): Promise<void>{
-    
-    /*if(exercicio.usuario){
+  async verificaExercicio(exercicio: Exercicio): Promise<void> {
+
+    if (exercicio.usuario) {
       await this.usuarioService.findById(exercicio.usuario.id)
     }
 
-    if(exercicio.tipo){
+    if (exercicio.tipo) {
       await this.tipoService.findById(exercicio.tipo.id)
     }
-  */
   }
 
 }

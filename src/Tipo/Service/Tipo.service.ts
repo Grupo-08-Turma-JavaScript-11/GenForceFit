@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository,ILike } from 'typeorm'
+import { Repository,ILike, DeleteResult } from 'typeorm'
 import { Tipo } from '../Entity/Tipo.Entity'
 
 @Injectable()
@@ -44,6 +44,7 @@ export class TipoService {
 
   return tipos
 }
+
 async findByGrupoMuscular(grupo_muscular: string): Promise<Tipo[]> {
   const tipos = await this.tipoRepository.find({
     where: {
@@ -69,8 +70,8 @@ async findByGrupoMuscular(grupo_muscular: string): Promise<Tipo[]> {
     return await this.tipoRepository.save(tipo)
   }
 
-  async delete(id: number): Promise<void> {
+  async delete(id: number): Promise<DeleteResult> {
     await this.findById(id)
-    await this.tipoRepository.delete(id)
+    return this.tipoRepository.delete(id)
   }
 }

@@ -9,16 +9,18 @@ import {
   HttpCode,
   HttpStatus,
   UseGuards,
+  ParseIntPipe,
 } from '@nestjs/common';
-import { UsuariosService } from '../service/usuarios.service';
+import { UsuarioService } from '../service/usuarios.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Usuario } from '../entities/usuarios.entity';
+import { DeleteResult } from 'typeorm';
 
 @ApiTags('Usuarios')
 @ApiBearerAuth()
 @Controller('usuarios')
-export class UsuariosController {
-  constructor(private readonly usuariosService: UsuariosService) {}
+export class UsuarioController {
+  constructor(private readonly usuariosService: UsuarioService) { }
 
   //@UseGuards(AuthGuard('jwt'))
   @Get()
@@ -30,8 +32,8 @@ export class UsuariosController {
   //@UseGuards(AuthGuard('jwt'))
   @Get(':id')
   @HttpCode(HttpStatus.OK)
-  findOne(@Param('id') id: string): Promise<Usuario> {
-    return this.usuariosService.findById(+id);
+  findOne(@Param('id',ParseIntPipe) id: number): Promise<Usuario> {
+    return this.usuariosService.findById(id);
   }
 
   @Post()
@@ -43,17 +45,14 @@ export class UsuariosController {
   //@UseGuards(AuthGuard('jwt'))
   @Put(':id')
   @HttpCode(HttpStatus.OK)
-  update(
-    @Param('id') id: string,
-    @Body() usuario: Usuario,
-  ): Promise<Usuario> {
-    return this.usuariosService.update(+id, usuario);
+  update(@Body() usuario: Usuario): Promise<Usuario> {
+    return this.usuariosService.update(usuario);
   }
 
   //@UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  remove(@Param('id') id: string): Promise<void> {
-    return this.usuariosService.remove(+id);
+  delete(@Param('id',ParseIntPipe) id: number): Promise<DeleteResult> {
+    return this.usuariosService.delete(id);
   }
 }
