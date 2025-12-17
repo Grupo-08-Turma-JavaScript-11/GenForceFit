@@ -39,7 +39,7 @@ export class TipoService {
   })
 
   if (tipos.length === 0) {
-    throw new NotFoundException('Nenhum tipo encontrado com essa descrição')
+   throw new NotFoundException('Nenhum tipo encontrado com essa descrição')
   }
 
   return tipos
