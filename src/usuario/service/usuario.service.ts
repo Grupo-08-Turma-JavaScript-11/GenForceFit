@@ -3,12 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Usuario } from '../entities/usuario.entity';
+import { Bcrypt } from '../../auth/bcrypt/bcrypt';
 
 @Injectable()
 export class UsuarioService {
   constructor(
     @InjectRepository(Usuario)
     private readonly usuarioRepository: Repository<Usuario>,
+    private bcrypt: Bcrypt
   ) {}
 
   async findAll(): Promise<Usuario[]> {
@@ -40,8 +42,7 @@ export class UsuarioService {
       throw new HttpException('Usuário já existe', HttpStatus.BAD_REQUEST);
     }
 
-    const salt = await bcrypt.genSalt();
-    usuario.senha = await bcrypt.hash(usuario.senha, salt);
+    usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha);
 
     return this.usuarioRepository.save(usuario);
   }
@@ -56,6 +57,7 @@ export class UsuarioService {
       throw new HttpException('Usuário já existe',HttpStatus.BAD_REQUEST);
     }
 
+    usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha);
     return this.usuarioRepository.save(usuario);
   }
 

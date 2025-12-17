@@ -15,6 +15,8 @@ import { UsuarioService } from '../service/usuario.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Usuario } from '../entities/usuario.entity';
 import { DeleteResult } from 'typeorm';
+import { AuthGuard } from '@nestjs/passport';
+import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 
 @ApiTags('Usuarios')
 @ApiBearerAuth()
@@ -22,14 +24,14 @@ import { DeleteResult } from 'typeorm';
 export class UsuarioController {
   constructor(private readonly usuariosService: UsuarioService) { }
 
-  //@UseGuards(AuthGuard('jwt'))
+  @UseGuards(JwtAuthGuard)
   @Get()
   @HttpCode(HttpStatus.OK)
   findAll(): Promise<Usuario[]> {
     return this.usuariosService.findAll();
   }
 
-  //@UseGuards(AuthGuard('jwt'))
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   findOne(@Param('id',ParseIntPipe) id: number): Promise<Usuario> {
@@ -42,14 +44,14 @@ export class UsuarioController {
     return this.usuariosService.create(usuario);
   }
 
-  //@UseGuards(AuthGuard('jwt'))
+  @UseGuards(JwtAuthGuard)
   @Put(':id')
   @HttpCode(HttpStatus.OK)
   update(@Body() usuario: Usuario): Promise<Usuario> {
     return this.usuariosService.update(usuario);
   }
 
-  //@UseGuards(AuthGuard('jwt'))
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   delete(@Param('id',ParseIntPipe) id: number): Promise<DeleteResult> {

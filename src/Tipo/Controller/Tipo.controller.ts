@@ -1,13 +1,17 @@
 import {
-  Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put
+  Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put,
+  UseGuards
 } from '@nestjs/common'
 import { TipoService } from '../service/tipo.service'
 import { Tipo } from '../entities/tipo.entity'
-import { ApiTags } from '@nestjs/swagger'
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { DeleteResult } from 'typeorm'
+import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard'
 
+@UseGuards(JwtAuthGuard)
 @ApiTags('Tipos')
 @Controller('/tipos')
+@ApiBearerAuth()
 export class TipoController {
 
   constructor(
