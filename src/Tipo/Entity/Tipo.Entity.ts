@@ -1,7 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty } from "class-validator";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Exercicio } from  '../../exercicio/services/exercicio.service'
+import { Exercicio } from "../../exercicio/entities/exercicio.entity";
+
 
 @Entity({ name: "tb_tipo" })
 export class Tipo {
@@ -22,5 +23,5 @@ export class Tipo {
 
   @OneToMany(() => Exercicio, (exercicio) => exercicio.tipo)
   @ApiProperty()
-  exercicios: Exercicio[];
+  exercicio: Exercicio[];
 }

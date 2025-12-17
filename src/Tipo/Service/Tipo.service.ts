@@ -13,14 +13,14 @@ export class TipoService {
 
   async findAll(): Promise<Tipo[]> {
     return await this.tipoRepository.find({
-      relations: { exercicios: true }
+      relations: { exercicio: true }
     })
   }
 
   async findById(id: number): Promise<Tipo> {
     const tipo = await this.tipoRepository.findOne({
       where: { id },
-      relations: { exercicios: true }
+      relations: { exercicio: true }
     })
 
     if (!tipo) {
@@ -35,7 +35,7 @@ export class TipoService {
     where: {
       descricao: ILike(`%${descricao}%`)
     },
-    relations: { exercicios: true }
+    relations: { exercicio: true }
   })
 
   if (tipos.length === 0) {
@@ -49,7 +49,7 @@ async findByGrupoMuscular(grupo_muscular: string): Promise<Tipo[]> {
     where: {
       grupo_muscular: ILike(`%${grupo_muscular}%`)
     },
-    relations: { exercicios: true }
+    relations: { exercicio: true }
   })
 
   if (tipos.length === 0) {
