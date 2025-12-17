@@ -2,59 +2,54 @@ import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post,
 import { ExercicioService } from "../services/exercicio.service";
 import { Exercicio } from "../entities/exercicio.entity";
 import { DeleteResult } from "typeorm";
+import { ApiTags } from "@nestjs/swagger";
 
-
-@Controller ("/exercicio")
+@ApiTags('Exercicio')
+@Controller("/exercicio")
 export class ExercicioController {
-    constructor (
+    constructor(
         private readonly exercicioService: ExercicioService) { }
 
     @Get()
-    @HttpCode (HttpStatus.OK)
+    @HttpCode(HttpStatus.OK)
     findAll(): Promise<Exercicio[]> {
         return this.exercicioService.findAll();
     }
 
     @Get('/:id')
     @HttpCode(HttpStatus.OK)
-    findById(@Param ('id', ParseIntPipe) id: number): Promise<Exercicio>{
+    findById(@Param('id', ParseIntPipe) id: number): Promise<Exercicio> {
         return this.exercicioService.findById(id)
     }
 
-    @Get('/grupomuscular/:grupoMuscular')
+    @Get('/nome/:nome')
     @HttpCode(HttpStatus.OK)
-    findByGrupoMuscular(@Param('grupoMuscular') grupoMuscular: string): Promise<Exercicio[]>{
-        return this.exercicioService.findByGrupoMuscular(grupoMuscular)
+    findByNome(@Param('nome') nome: string): Promise<Exercicio[]> {
+        return this.exercicioService.findByNome(nome)
     }
 
-    @Get('/nomeexercicio/:nomeExercicio')
+    @Get('/equipamento/:equipamento')
     @HttpCode(HttpStatus.OK)
-    findByNomeExercicio(@Param('nomeExercicio') nomeExercicio: string): Promise<Exercicio[]>{
-        return this.exercicioService.findByNomeExercicio(nomeExercicio)
-    }
-
-    @Get('/nivel/:nivelExercicio')
-    @HttpCode(HttpStatus.OK)
-    findByNivel(@Param('nivelExercicio') nivelExercicio: string): Promise<Exercicio[]>{
-         return this.exercicioService.findByNivel(nivelExercicio)
+    findByEquipamento(@Param('equipamento') equipamento: string): Promise<Exercicio[]> {
+        return this.exercicioService.findByEquipamento(equipamento)
     }
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    create(@Body() exercicio: Exercicio): Promise<Exercicio>{
+    create(@Body() exercicio: Exercicio): Promise<Exercicio> {
         return this.exercicioService.create(exercicio)
-    } 
+    }
 
     @Put()
     @HttpCode(HttpStatus.OK)
-    update(@Body () exercicio: Exercicio): Promise<Exercicio>{
+    update(@Body() exercicio: Exercicio): Promise<Exercicio> {
         return this.exercicioService.update(exercicio)
     }
 
 
     @Delete('/:id')
     @HttpCode(HttpStatus.NO_CONTENT)
-    delete(@Param ('id', ParseIntPipe) id: number): Promise<DeleteResult> {
+    delete(@Param('id', ParseIntPipe) id: number): Promise<DeleteResult> {
         return this.exercicioService.delete(id)
     }
 

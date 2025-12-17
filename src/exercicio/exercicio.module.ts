@@ -7,10 +7,10 @@ import { ExercicioController } from "./controllers/exercicio.controller";
 
 
 @Module({
-    imports:[TypeOrmModule.forFeature([Exercicio])],
-    controllers:[ExercicioController],
-    providers:[ExercicioService],
+    imports: [TypeOrmModule.forFeature([Exercicio]), /*UsuarioModule, TipoModule*/],
+    controllers: [ExercicioController],
+    providers: [ExercicioService, /* UsuarioService, TipoService */],
     exports: [TypeOrmModule]
 })
-export class ExercicioModule{}
+export class ExercicioModule { }
 

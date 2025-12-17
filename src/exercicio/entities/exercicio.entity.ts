@@ -1,31 +1,53 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({name: "tb_Exercicios"})
-export class Exercicio{
+@Entity({ name: "tb_exercicio" })
+export class Exercicio {
 
+    @ApiProperty()
     @PrimaryGeneratedColumn()
     id: number
 
+    @ApiProperty()
     @IsNotEmpty()
-    @Column({ length: 255, nullable: false})
-    nomeExercicio: string
+    @Column({ length: 100, nullable: false })
+    nome: string
 
+    @ApiProperty()
     @IsNotEmpty()
-    @Column({ length: 255, nullable: false})
-    grupoMuscular: string
+    @Column({ length: 255, nullable: false })
+    descricao: string
 
+    @ApiProperty()
     @IsNotEmpty()
-    @Column()
-    series: number
+    @Column({ length: 100, nullable: false })
+    repeticoes: string
 
+    @ApiProperty()
     @IsNotEmpty()
-    @Column()
-    repeticoes: number
+    @Column({ length: 100, nullable: false })
+    intervalo: string
 
+    @ApiProperty()
     @IsNotEmpty()
-    @Column({ length: 255, nullable: false})
-    nivel: string
+    @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
+    carga: number
+
+    @ApiProperty()
+    @Column({ length: 100 })
+    equipamento: string
+
+    // @ManyToOne(() => Usuario, (usuario) => usuario.exercicio, {
+    //     onDelete: 'CASCADE'
+    // })
+    // usuario: Usuario
+
+    // @ManyToOne(() => Tipo, (tipo) => tipo.exercicio, {
+    //     onDelete: 'CASCADE'
+    // })
+    // tipo: Tipo
+
 
 
 }

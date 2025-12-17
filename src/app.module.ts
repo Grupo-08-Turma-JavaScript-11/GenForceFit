@@ -15,8 +15,8 @@ import { ExercicioModule } from './exercicio/exercicio.module';
     entities: [Exercicio],
     synchronize: false,
   }),
-  ExercicioModule],
+    ExercicioModule],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }
