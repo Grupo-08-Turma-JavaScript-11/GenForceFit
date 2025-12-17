@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { ILike, Repository } from 'typeorm'
 import { DeleteResult } from 'typeorm'
 import { TipoService } from '../../tipo/service/tipo.service'
-import { UsuarioService } from '../../usuarios/service/usuarios.service'
+import { UsuarioService } from '../../usuario/service/usuario.service'
 
 
 @Injectable()

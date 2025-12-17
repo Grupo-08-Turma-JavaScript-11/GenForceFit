@@ -3,11 +3,11 @@ import { Bcrypt } from './bcrypt/bcrypt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants/constants';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './service/auth.service';
 import { LocalStrategy } from './strategy/local.strategy';
 import { AuthController } from './controller/auth.controller';
 import { JwtStrategy } from './strategy/jwt.strategy';
-import { UsuarioModule } from '../usuarios/usuarios.module';
+import { UsuarioModule } from '../usuario/usuarios.module';
 
 @Module({
   imports: [

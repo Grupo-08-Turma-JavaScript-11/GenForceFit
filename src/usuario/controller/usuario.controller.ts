@@ -11,9 +11,9 @@ import {
   UseGuards,
   ParseIntPipe,
 } from '@nestjs/common';
-import { UsuarioService } from '../service/usuarios.service';
+import { UsuarioService } from '../service/usuario.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { Usuario } from '../entities/usuarios.entity';
+import { Usuario } from '../entities/usuario.entity';
 import { DeleteResult } from 'typeorm';
 
 @ApiTags('Usuarios')

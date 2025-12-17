@@ -3,9 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { ExercicioModule } from './exercicio/exercicio.module'
 import { TipoModule } from './tipo/tipo.module'
 import { Exercicio } from './exercicio/entities/exercicio.entity'
-import { Tipo } from './tipo/entity/tipo.entity'
-import { Usuario } from './usuarios/entities/usuarios.entity'
-import { UsuarioModule } from './usuarios/usuarios.module'
+import { Tipo } from './tipo/entities/tipo.entity'
+import { Usuario } from './usuario/entities/usuario.entity'
+import { UsuarioModule } from './usuario/usuarios.module'
 import { AppController } from './app.controller'
 
 @Module({
