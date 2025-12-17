@@ -2,7 +2,9 @@ import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { Tipo } from './entities/tipo.entity'
 import { TipoService } from './service/tipo.service'
-import { TipoController } from './controller/tipo.controller'
+import { TipoController } from './Controller/tipo.controller'
+
+
 
 
 @Module({
