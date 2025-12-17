@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Exercicio } from './exercicio/entities/exercicio.entity';
+import { ExercicioModule } from './exercicio/exercicio.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -11,9 +12,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     username: "root",
     password: "12345678",
     database: "db_genforcefit",
-    entities: [],
-    synchronize: true,
-  })],
+    entities: [Exercicio],
+    synchronize: false,
+  }),
+  ExercicioModule],
   controllers: [],
   providers: [],
 })
