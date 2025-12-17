@@ -1,43 +1,59 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';   
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Put,
+  HttpCode,
+  HttpStatus,
+  UseGuards,
+} from '@nestjs/common';
 import { UsuariosService } from '../service/usuarios.service';
-import { Usuario } from '../entities/usuario.entity';
-import { JwAuthGuard } from '@nestjs/jwt';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Usuario } from '../entities/usuarios.entity';
 
 @ApiTags('Usuarios')
 @ApiBearerAuth()
 @Controller('usuarios')
-export class UsuariosController {                                           
+export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
-    @UseGuards(JwAuthGuard)
-    @Get()
-    @HttpCode(HttpStatus.OK)
-    findAll(): Promise<Usuario[]> {
-        return this.usuariosService.findAll();
-    }
-    
-    @UseGuards(JwAuthGuard)
-    @Get(':id')
-    @HttpCode(HttpStatus.OK)
-    findOne(@Param('id') id: string): Promise<Usuario> {
-        return this.usuariosService.findOne(+id);
-    }
+  //@UseGuards(AuthGuard('jwt'))
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  findAll(): Promise<Usuario[]> {
+    return this.usuariosService.findAll();
+  }
 
-    @Post()
-    @HttpCode(HttpStatus.CREATED)
-    create(@Body() usuario: Usuario): Promise<Usuario> {
-        return this.usuariosService.create(usuario);
-    }
+  //@UseGuards(AuthGuard('jwt'))
+  @Get(':id')
+  @HttpCode(HttpStatus.OK)
+  findOne(@Param('id') id: string): Promise<Usuario> {
+    return this.usuariosService.findById(+id);
+  }
 
-    @UseGuards(JwAuthGuard)
-    @Put(':id')
-    @HttpCode(HttpStatus.OK)
-    update(@Param('id') id: string, @Body() usuario: Usuario): Promise<void> {
-        return this.usuariosService.update(+id, usuario);
-    }
+  @Post()
+  @HttpCode(HttpStatus.CREATED)
+  create(@Body() usuario: Usuario): Promise<Usuario> {
+    return this.usuariosService.create(usuario);
+  }
 
-    @Delete(':id')
-    remove(@Param('id') id: string): Promise<void> {
-        return this.usuariosService.remove(+id);
-    }}
+  //@UseGuards(AuthGuard('jwt'))
+  @Put(':id')
+  @HttpCode(HttpStatus.OK)
+  update(
+    @Param('id') id: string,
+    @Body() usuario: Usuario,
+  ): Promise<Usuario> {
+    return this.usuariosService.update(+id, usuario);
+  }
+
+  //@UseGuards(AuthGuard('jwt'))
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  remove(@Param('id') id: string): Promise<void> {
+    return this.usuariosService.remove(+id);
+  }
+}
