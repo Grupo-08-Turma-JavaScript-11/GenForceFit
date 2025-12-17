@@ -1,7 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
-import * as bcrypt from 'bcrypt';
 import { Usuario } from '../entities/usuario.entity';
 import { Bcrypt } from '../../auth/bcrypt/bcrypt';
 
@@ -9,7 +8,7 @@ import { Bcrypt } from '../../auth/bcrypt/bcrypt';
 export class UsuarioService {
   constructor(
     @InjectRepository(Usuario)
-    private readonly usuarioRepository: Repository<Usuario>,
+    private usuarioRepository: Repository<Usuario>,
     private bcrypt: Bcrypt
   ) {}
 

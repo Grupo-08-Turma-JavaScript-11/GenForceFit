@@ -15,7 +15,6 @@ import { UsuarioService } from '../service/usuario.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Usuario } from '../entities/usuario.entity';
 import { DeleteResult } from 'typeorm';
-import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 
 @ApiTags('Usuarios')

@@ -13,7 +13,7 @@ import { TipoService } from "../tipo/service/tipo.service";
 @Module({
     imports: [TypeOrmModule.forFeature([Exercicio]), UsuarioModule, TipoModule],
     controllers: [ExercicioController],
-    providers: [ExercicioService, UsuarioService, TipoService],
+    providers: [ExercicioService],
     exports: [TypeOrmModule]
 })
 export class ExercicioModule { }

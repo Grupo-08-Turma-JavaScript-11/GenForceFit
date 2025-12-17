@@ -17,12 +17,12 @@ export class Usuario {
   @IsEmail()
   @IsNotEmpty()
   @Column({ length: 100, unique: true })
-  @ApiProperty()
+  @ApiProperty({example: "email@email.com.br"})
   usuario: string;
 
   @MinLength(8)
   @IsNotEmpty()
-  @Column({ length: 45, nullable: false})
+  @Column({nullable: false})
   @ApiProperty()
   senha: string;
 
@@ -41,7 +41,7 @@ export class Usuario {
   @ApiProperty()
   peso: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2})
+  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0})
   @ApiProperty()
   IMC: number;
 
