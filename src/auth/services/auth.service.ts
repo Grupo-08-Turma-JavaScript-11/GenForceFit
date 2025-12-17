@@ -36,7 +36,7 @@ export class AuthService {
     const payload = { sub: usuarioLogin.usuario };
 
     const buscaUsuario = await this.usuarioService.findByUsuario(
-        usuarioLogin.usuario
+      usuarioLogin.usuario,
     );
 
     return {
