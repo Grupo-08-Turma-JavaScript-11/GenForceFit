@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Exercicio } from './exercicio/entities/exercicio.entity';
 import { ExercicioModule } from './exercicio/exercicio.module';
+import { UsuariosModule } from './usuarios/usuarios.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -15,8 +15,10 @@ import { ExercicioModule } from './exercicio/exercicio.module';
     entities: [Exercicio],
     synchronize: false,
   }),
+  UsuariosModule,
   ExercicioModule],
   controllers: [],
   providers: [],
+  
 })
 export class AppModule {}
