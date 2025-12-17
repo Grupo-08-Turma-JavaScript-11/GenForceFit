@@ -1,32 +1,29 @@
-import { Module } from '@nestjs/common'
-import { TypeOrmModule } from '@nestjs/typeorm'
-import { ExercicioModule } from './exercicio/exercicio.module'
-import { TipoModule } from './tipo/tipo.module'
-import { Exercicio } from './exercicio/entities/exercicio.entity'
-import { Tipo } from './tipo/entities/tipo.entity'
-import { Usuario } from './usuario/entities/usuario.entity'
-import { UsuarioModule } from './usuario/usuarios.module'
-import { AppController } from './app.controller'
-import { UsuarioLogin } from './auth/entities/usuariologin.entity'
-import { AuthModule } from './auth/auth.module'
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ExercicioModule } from './exercicio/exercicio.module';
+import { TipoModule } from './tipo/tipo.module';
+import { Exercicio } from './exercicio/entities/exercicio.entity';
+import { Tipo } from './tipo/entities/tipo.entity';
+import { Usuario } from './usuario/entities/usuario.entity';
+import { UsuarioModule } from './usuario/usuarios.module';
+import { AppController } from './app.controller';
+import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
+import { ProdService } from './data/services/prod.service';
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
-    type: "mysql",
-    host: "localhost",
-    port: 3306,
-    username: "root",
-    password: "12345678",
-    database: "db_genforcefit",
-    entities: [Exercicio, Tipo, Usuario],
-    synchronize: true,
-  }),
+  imports: [
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      useClass: ProdService,
+      imports: [ConfigModule],
+    }),
     ExercicioModule,
     TipoModule,
     UsuarioModule,
-    AuthModule],
+    AuthModule,
+  ],
   controllers: [AppController],
   providers: [],
-  
 })
-export class AppModule { }
+export class AppModule {}
