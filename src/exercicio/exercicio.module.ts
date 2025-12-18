@@ -5,8 +5,6 @@ import { ExercicioService } from "./services/exercicio.service";
 import { ExercicioController } from "./controllers/exercicio.controller";
 import { UsuarioModule } from "../usuario/usuarios.module";
 import { TipoModule } from "../tipo/tipo.module";
-import { UsuarioService } from "../usuario/service/usuario.service";
-import { TipoService } from "../tipo/service/tipo.service";
 
 
 

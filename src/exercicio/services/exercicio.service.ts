@@ -3,8 +3,8 @@ import { Exercicio } from '../entities/exercicio.entity'
 import { InjectRepository } from '@nestjs/typeorm'
 import { ILike, Repository } from 'typeorm'
 import { DeleteResult } from 'typeorm'
-import { TipoService } from '../../tipo/service/tipo.service'
 import { UsuarioService } from '../../usuario/service/usuario.service'
+import { TipoService } from '../../tipo/service/tipo.service'
 
 
 @Injectable()
