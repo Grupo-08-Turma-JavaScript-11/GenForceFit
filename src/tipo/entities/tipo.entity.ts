@@ -12,14 +12,14 @@ export class Tipo {
   id: number;
 
   @IsNotEmpty()
+  @Column({ length: 100, nullable: false })
+  @ApiProperty()
+  nome: string;
+
+  @IsNotEmpty()
   @Column({ length: 255, nullable: false })
   @ApiProperty()
   descricao: string;
-
-  @IsNotEmpty()
-  @Column({ length: 100, nullable: false })
-  @ApiProperty()
-  grupo_muscular: string;
 
   @OneToMany(() => Exercicio, (exercicio) => exercicio.tipo)
   @ApiProperty()

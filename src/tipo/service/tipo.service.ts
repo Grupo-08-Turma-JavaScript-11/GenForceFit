@@ -45,10 +45,10 @@ export class TipoService {
   return tipos
 }
 
-async findByGrupoMuscular(grupo_muscular: string): Promise<Tipo[]> {
+async findByNome(nome: string): Promise<Tipo[]> {
   const tipos = await this.tipoRepository.find({
     where: {
-      grupo_muscular: ILike(`%${grupo_muscular}%`)
+      nome: ILike(`%${nome}%`)
     },
     relations: { exercicio: true }
   })
