@@ -40,12 +40,15 @@ export class Exercicio {
      @Column({ length: 100 })
      equipamento: string
 
+     @ApiProperty()
+     @IsNotEmpty()
      @ManyToOne(() => Usuario, (usuario) => usuario.exercicio, {
           onDelete: 'CASCADE'
      })
      usuario: Usuario
 
      @ApiProperty()
+     @IsNotEmpty()
      @ManyToOne(() => Tipo, (tipo) => tipo.exercicio, {
           onDelete: 'CASCADE'
      })
