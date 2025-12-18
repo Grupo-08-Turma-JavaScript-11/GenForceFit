@@ -9,7 +9,7 @@ export class UsuarioService {
   constructor(
     @InjectRepository(Usuario)
     private usuarioRepository: Repository<Usuario>,
-    private bcrypt: Bcrypt
+    private bcrypt: Bcrypt,
   ) {}
 
   async findAll(): Promise<Usuario[]> {
@@ -22,7 +22,7 @@ export class UsuarioService {
     });
 
     if (!usuario) {
-      throw new HttpException('Usuário não encontrado',HttpStatus.NOT_FOUND,);
+      throw new HttpException('Usuário não encontrado', HttpStatus.NOT_FOUND);
     }
 
     return usuario;
@@ -41,29 +41,35 @@ export class UsuarioService {
       throw new HttpException('Usuário já existe', HttpStatus.BAD_REQUEST);
     }
 
+    usuario.IMC = this.calcularImc(usuario.peso, usuario.altura);
+
     usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha);
 
     return this.usuarioRepository.save(usuario);
   }
 
   async update(usuario: Usuario): Promise<Usuario> {
-    
     const usuarioBanco = await this.findById(usuario.id);
 
     const usuarioExistente = await this.findByUsuario(usuario.usuario);
 
     if (usuarioExistente && usuarioExistente.id !== usuarioBanco.id) {
-      throw new HttpException('Usuário já existe',HttpStatus.BAD_REQUEST);
+      throw new HttpException('Usuário já existe', HttpStatus.BAD_REQUEST);
     }
+
+    usuario.IMC = this.calcularImc(usuario.peso, usuario.altura);
 
     usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha);
     return this.usuarioRepository.save(usuario);
   }
 
-  async delete(id: number): Promise<DeleteResult>{
-    
-    await this.findById(id)
-    
+  async delete(id: number): Promise<DeleteResult> {
+    await this.findById(id);
+
     return this.usuarioRepository.delete(id);
+  }
+
+  calcularImc(peso: number, altura: number): number {
+    return +(peso / (altura * altura)).toFixed(2);
   }
 }

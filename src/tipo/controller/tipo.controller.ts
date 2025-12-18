@@ -40,10 +40,10 @@ export class TipoController {
   }
 
 
-  @Get('/grupo-muscular/:grupo_muscular')
+  @Get('/nome/:nome')
   @HttpCode(HttpStatus.OK)
-  findByGrupoMuscular(@Param('grupo_muscular') grupo_muscular: string): Promise<Tipo[]> {
-    return this.tipoService.findByGrupoMuscular(grupo_muscular)
+  findByNome(@Param('nome') nome: string): Promise<Tipo[]> {
+    return this.tipoService.findByNome(nome)
   }
 
 
