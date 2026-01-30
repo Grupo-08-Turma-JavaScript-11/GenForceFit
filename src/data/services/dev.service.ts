@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { Usuario } from '../../usuario/entities/usuario.entity';
 import { Exercicio } from '../../exercicio/entities/exercicio.entity';
-import { Tipo } from '../../tipo/entities/tipo.entity';
+import { GrupoMuscular } from '../../grupoMuscular/entities/grupoMuscular.entity';
 
 @Injectable()
 export class DevService implements TypeOrmOptionsFactory {
@@ -14,7 +14,7 @@ export class DevService implements TypeOrmOptionsFactory {
       username: 'root',
       password: '12345678',
       database: 'db_genforcefit',
-      entities: [Exercicio, Tipo, Usuario],
+      entities: [Exercicio, GrupoMuscular, Usuario],
       synchronize: true,
     };
   }

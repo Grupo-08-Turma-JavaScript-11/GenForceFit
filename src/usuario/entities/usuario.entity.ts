@@ -17,19 +17,19 @@ export class Usuario {
   @IsEmail()
   @IsNotEmpty()
   @Column({ length: 100, unique: true })
-  @ApiProperty({example: "email@email.com.br"})
+  @ApiProperty({ example: 'email@email.com.br' })
   usuario: string;
 
   @MinLength(8)
   @IsNotEmpty()
-  @Column({nullable: false})
+  @Column({ nullable: false })
   @ApiProperty()
   senha: string;
 
   @IsNotEmpty()
-  @Column({ length: 100, nullable: false})
+  @Column({ length: 100, nullable: false })
   @ApiProperty()
-  tipo: string;
+  grupoMuscular: string;
 
   @IsNotEmpty()
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
@@ -41,7 +41,7 @@ export class Usuario {
   @ApiProperty()
   peso: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0})
+  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
   @ApiProperty()
   IMC: number;
 
@@ -50,6 +50,6 @@ export class Usuario {
   foto: string;
 
   @ApiProperty()
-  @OneToMany(() => Exercicio, exercicio => exercicio.usuario)
+  @OneToMany(() => Exercicio, (exercicio) => exercicio.usuario)
   exercicio: Exercicio[];
 }

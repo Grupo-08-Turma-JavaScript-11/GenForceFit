@@ -1,10 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ExercicioModule } from './exercicio/exercicio.module';
-import { TipoModule } from './tipo/tipo.module';
-import { Exercicio } from './exercicio/entities/exercicio.entity';
-import { Tipo } from './tipo/entities/tipo.entity';
-import { Usuario } from './usuario/entities/usuario.entity';
+import { GrupoMuscularModule } from './grupoMuscular/grupoMuscular.module';
 import { UsuarioModule } from './usuario/usuarios.module';
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
@@ -19,7 +16,7 @@ import { ProdService } from './data/services/prod.service';
       imports: [ConfigModule],
     }),
     ExercicioModule,
-    TipoModule,
+    GrupoMuscularModule,
     UsuarioModule,
     AuthModule,
   ],
