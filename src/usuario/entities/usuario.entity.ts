@@ -29,7 +29,7 @@ export class Usuario {
   @IsNotEmpty()
   @Column({ length: 100, nullable: false })
   @ApiProperty()
-  grupoMuscular: string;
+  tipo: string;
 
   @IsNotEmpty()
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })

@@ -21,7 +21,7 @@ import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 @ApiBearerAuth()
 @Controller('usuarios')
 export class UsuarioController {
-  constructor(private readonly usuariosService: UsuarioService) { }
+  constructor(private readonly usuariosService: UsuarioService) {}
 
   @UseGuards(JwtAuthGuard)
   @Get()
@@ -33,7 +33,7 @@ export class UsuarioController {
   @UseGuards(JwtAuthGuard)
   @Get(':id')
   @HttpCode(HttpStatus.OK)
-  findOne(@Param('id',ParseIntPipe) id: number): Promise<Usuario> {
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Usuario> {
     return this.usuariosService.findById(id);
   }
 
@@ -53,7 +53,7 @@ export class UsuarioController {
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  delete(@Param('id',ParseIntPipe) id: number): Promise<DeleteResult> {
+  delete(@Param('id', ParseIntPipe) id: number): Promise<DeleteResult> {
     return this.usuariosService.delete(id);
   }
 }
